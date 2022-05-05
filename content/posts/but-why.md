@@ -21,7 +21,7 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowRssButtonInSectionTermList: true
 cover:
-    image: "/but_why.jpg" # image path/url
+    image: "/but_why.png" # image path/url
     alt: "But why?" # alt text
     caption: "<text>" # display caption under cover
     relative: false # when using page bundles set this to true
