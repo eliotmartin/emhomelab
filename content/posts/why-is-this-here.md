@@ -21,11 +21,11 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowRssButtonInSectionTermList: true
 cover:
-    image: "<image path/url>" # image path/url
-    alt: "<alt text>" # alt text
+    image: "/but_why.jpg" # image path/url
+    alt: "But why?" # alt text
     caption: "<text>" # display caption under cover
     relative: false # when using page bundles set this to true
-    hidden: true # only hide on current single page
+    hidden: false # only hide on current single page
 ---
 Inspired by the [r/selfhosted](https://www.reddit.com/r/selfhosted/) and [r/homelab](https://www.reddit.com/r/homelab/) subreddits, this blog is a place where I record all my mucking about with Linux, docker and self-hosted open-source projects.
     
