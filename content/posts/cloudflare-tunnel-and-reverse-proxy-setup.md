@@ -54,10 +54,34 @@ You can find more about *NGIX Proxy Manger* on [their website](https://nginxprox
 Cloudflare Tunnel requires the installation and configuration of a lightweight, open-source server-side daemon, *cloudflared*, to connect your infrastructure to Cloudflare.  Releases can be found on [GitHub](https://github.com/cloudflare/cloudflared/releases) and downloads are available as standalone binaries or packages like Debian and RPM.
 
 ### 1. Install the Cloudflared package
+
+Download and setup the cloudflared daemon using...
+
 ```
 $ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb
 $ sudo dkpg -i cloudflared-linux-arm64.deb
 ```
+This creates a default directory when storing credentials files for your tunnel and the certificates it generates when you authenticate with Cloudflare.  The default directory is also where cloudflared will look for a configuration file (assuming no other file path is specified when running a tunnel).
+
+This directory will be in the home directory `~/.cloudflared`.
 
 
+### 2. Authenticate with Cloudflare
+Now authenticate the installed daemon with Cloudflare using...
 
+```
+$ cloudflared tunnel login
+```
+Open the URL that this generates and log into your Cloudflared account.  If successful the webpage will tell you everything is authenticated and will issue you a certificate by putting the file `cert.pem` in the `~/.cloudflared` directory.
+
+### 3. Create a Tunnel
+With the daemon successfully authenticate, you can create a tunnel...
+
+```
+$ cloudflared tunnel create <TUNNEL-NAME>
+```
+`<TUNNEL-NAME>` can be anything you want to call the new Tunnel.
+
+As well as the [Tunnel name](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-name), the Tunnel will also be given a unique, alphanumeric ID called a [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid).
+
+This command also creates a (Crednetials file) [https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#credentials-file] in the `~/.cloudflared` directory.
