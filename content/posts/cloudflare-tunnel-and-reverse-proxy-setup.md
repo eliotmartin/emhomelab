@@ -34,16 +34,16 @@ Exposing some of my homelab services to the internet involves forwarding ports o
 ## The Solution
 Set up a **Cloudflare Tunnel** and **NGINX Proxy Manager**
 
-## Cloudflare's Tunnel
+### Cloudflare's Tunnel
 According to Cloudflare themselves, a **Cloudflare Tunnel**...
 
 >  ...exposes applications running on your local web server on any network with an internet connection without manually adding DNS records or configuring a firewall or router.
 
 You can read more about *Cloudflare's Tunnels* on [their website](https://www.cloudflare.com/en-gb/products/tunnel/), but importantly you can create a [free Cloudflare account](https://www.cloudflare.com/plans/free/) that allows you to create a Tunnel for no extra charge.
 
-You will need to setup a domain on cloudflares DNS service for the Tunnel to work, but the domain itself doesn't need to be registered with Cloudflare.  I used one I bought from [Ionas for £1.00](https://www.ionos.co.uk/domains/domain-names), but it works just as well with free domains.  You will need to delgate Cloudflare as the authoritative DNS nameserver by replacing your domains original nameservers with ones provided by Cloudflare.
+You will need to setup a domain on cloudflares DNS service for the Tunnel to work, but the domain itself doesn't need to be registered with Cloudflare.  I used one I bought from [Ionas for £1.00](https://www.ionos.co.uk/domains/domain-names), but it works just as well with free domains.  You just need to delgate Cloudflare as the authoritative DNS nameserver by replacing your domains original nameservers with ones provided by Cloudflare.
 
-## NGINX Proxy Manager
+### NGINX Proxy Manager
 The other component of this solution is a reverse proxy server, specifically in this case NGINX Proxy Manager.  **A reverse proxy server**...
 
 > ...typically sits behind the firewall in a private network and directs client requests to the appropriate backend server. A reverse proxy provides an additional level of abstraction and control to ensure the smooth flow of network traffic between clients and servers.
