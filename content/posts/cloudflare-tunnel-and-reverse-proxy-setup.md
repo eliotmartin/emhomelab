@@ -11,7 +11,7 @@ TocOpen: false
 draft: true
 hidemeta: false
 comments: false
-description: "REPLACEME"
+description: "Avoiding port forwards and securing my shit"
 disableHLJS: true # to disable highlightjs
 disableShare: false
 disableHLJS: false
