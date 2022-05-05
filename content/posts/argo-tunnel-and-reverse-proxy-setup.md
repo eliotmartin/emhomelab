@@ -1,5 +1,5 @@
 ---
-title: "Argo Tunnel and Reverse Proxy Setup"
+title: "Cloudflare Tunnel and Reverse Proxy Setup"
 date: 2022-05-05T21:08:09+01:00
 # weight: 1
 # aliases: ["/first"]
