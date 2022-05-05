@@ -82,6 +82,4 @@ $ cloudflared tunnel create <TUNNEL-NAME>
 ```
 `<TUNNEL-NAME>` can be anything you want to call the new Tunnel.
 
-As well as the [Tunnel name](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-name), the Tunnel will also be given a unique, alphanumeric ID called a [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid).
-
-This command also creates a (Crednetials file) [https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#credentials-file] in the `~/.cloudflared` directory.
+This sets up a new Tunnel and creates a [Credentials file](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#credentials-file) in the `~/.cloudflared` directory 
