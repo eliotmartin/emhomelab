@@ -28,6 +28,8 @@ cover:
     hidden: true # only hide on current single page
 ---
 Inspired by the [r/selfhosted](https://www.reddit.com/r/selfhosted/) and [r/homelab](https://www.reddit.com/r/homelab/) subreddits, this blog is a place where I record all my mucking about with Linux, docker and self-hosted open-source projects.
+    
+Originally I intented to self-host the infrastructure that serves this blog, and for a while managed to successfully set up hugo and NGINX in docker containers serving the site via a cloudflare Argo tunnel.  But I struggled with the CD aspect of keeping the site up-to-date so have moved it to Cloudflares pages which seems to be working.
 
 
 
