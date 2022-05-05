@@ -35,5 +35,5 @@ According to Cloudflare themselves, a *Cloudflare Tunnel*...
 
 >  ...exposes applications running on your local web server on any network with an internet connection without manually adding DNS records or configuring a firewall or router.
 
-You can (read more about them on their website)[https://www.cloudflare.com/en-gb/products/tunnel/], but importantly you can create a (free Cloudflare account)[https://www.cloudflare.com/plans/free/] and create an Cloudflare Tunnel for no extra charge.
+You can (read more about them on their [website](https://www.cloudflare.com/en-gb/products/tunnel/), but importantly you can create a [free Cloudflare account](https://www.cloudflare.com/plans/free/) and create an Cloudflare Tunnel for no extra charge.
 
