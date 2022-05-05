@@ -6,7 +6,7 @@ date: 2022-05-05T21:08:09+01:00
 tags: ["first"]
 categories: ["non-tech"]
 author: "Eliot"
-showToc: false
+showToc: true
 TocOpen: false
 draft: true
 hidemeta: false
@@ -28,9 +28,11 @@ cover:
     relative: false # when using page bundles set this to true
     hidden: false # only hide on current single page
 ---
-I got paranoid about forwarding ports from my router to the services inside my network so did some digging on how I could better secure my infrastructure.
+## The Problem
+Exposing some of my homelab services to the internet involves forwarding ports on my router (specifically 80 and 443) to the machines hosting them.  This is bad and makes me paranoid.  I wanted to be able to reach these services from outside without compromising my networks security.
 
-**Cloudflare's Tunnel** and **NGINX Proxy Manager** is the *free* solution...
+## The Solution
+Setting up a **Cloudflare Tunnel** and **NGINX Proxy Manager**
 
 ## Cloudflare's Tunnel
 According to Cloudflare themselves, a **Cloudflare Tunnel**...
