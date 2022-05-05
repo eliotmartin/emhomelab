@@ -1,2 +1,2 @@
 # EMHomeLab
-Static blog website created with Hugo
+Static blog website created with Hugo and hosted with Cloudflare Pages.
