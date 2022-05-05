@@ -27,9 +27,9 @@ cover:
     relative: false # when using page bundles set this to true
     hidden: false # only hide on current single page
 ---
-Inspired by the [r/selfhosted](https://www.reddit.com/r/selfhosted/) and [r/homelab](https://www.reddit.com/r/homelab/) subreddits I have recently created a small home lab environment and been leveraging percussive maintenance (or *hitting it until it works*) to set up various open source project, with the aim of maybe learning something en route.
+Inspired by the [r/selfhosted](https://www.reddit.com/r/selfhosted/) and [r/homelab](https://www.reddit.com/r/homelab/) subreddits I have recently created a small home lab environment and been leveraging percussive maintenance (or *hitting it until it works*) to set up various open source projects, with the aim of maybe learning something en route.
 
-I am going to use this blog as an incentive to capture the detail of some of these projects, mainly to ensure I have reference docuemntation when something explodes, but also because it might even help someone else out.
+I'm going to use this blog (mainly) as an incentive to capture the detail of some of these projects to ensure I have reference documentation when something inevitably explodes, but also because it might even help someone else out.
 
 Off we go...
 
