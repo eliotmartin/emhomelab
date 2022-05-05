@@ -50,7 +50,14 @@ The other component of this solution is a reverse proxy server, specifically in 
 
 You can find more about *NGIX Proxy Manger* on [their website](https://nginxproxymanager.com/), but importantly it is a free. open source solution. I setup NGIX in a docker container using Docker Compose, but that is probably worthy of a post of it own.
 
+## Setting Up the cloudflare Tunnel
+Cloudflare Tunnel requires the installation and configuration of a lightweight, open-source server-side daemon, *cloudflared*, to connect your infrastructure to Cloudflare.  Releases can be found on [GitHub](https://github.com/cloudflare/cloudflared/releases) and downloads are available as standalone binaries or packages like Debian and RPM.
 
+### Install the Cloudflared package
+```
+$ wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb
+$ sudo dkpg -i cloudflared-linux-arm64.deb
+```
 
 
 
