@@ -94,9 +94,9 @@ params:
     hiddenInSingle: true # hide on single page
 
   editPost:
-    URL: "mailto://eliot@emhomelab.com?subject=Suggesting changes for "
+    URL: "https://github.com/eliotmartin/emhomelab/content"
     Text: "Suggest Changes" # edit text
-    appendFilePath: false # to append file path to Edit link
+    appendFilePath: true # to append file path to Edit link
 
   # for search
   # https://fusejs.io/api/options.html
