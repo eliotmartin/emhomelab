@@ -80,18 +80,15 @@ With the Cloudflared successfully authenticate, you can create a tunnel...
 ```lang-bash
 $ cloudflared tunnel create <TUNNEL-NAME>
 ```
-- `<TUNNEL-NAME>` is want to call the new Tunnel.
+- `<TUNNEL-NAME>` can be anything you want to call the new Tunnel
 
-This sets up a new Tunnel and creates a [Credentials file](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#credentials-file) in the `~/.cloudflared` directory.
-
-### 4. Confirm the Tunnel is Running
-All being well, a new Tunnel has been created.  This can be confirmed with the command...
+This sets up a new Tunnel (with the name `<TUNNEL-NAME>`) and creates a [Credentials file](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#credentials-file) in the `~/.cloudflared` directory.  This can be confirmed with the command...
 
 ```lang-bash
 $ cloudflared tunnel list
 ```
 
-If the Tunnel is running you should get an output along the lines of...
+If all is well you should get an output along the lines of...
 
 ```lang-bash
 You can obtain more detailed information for each tunnel with `cloudflared tunnel info <name/uuid>`
@@ -100,11 +97,11 @@ c522d8e5f-3b55-4abcd-8416-0335c87a1457  <TUNNEL-NAME>   2022-05-03T20:31:57Z    
 ```
 Note the `ID` in the reponse.  This the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid).  You will need this in the next step.
 
-### 5. Create a config.yaml File
+### 4. Create a config.yaml File
 Cloudflared is going to need some configuration to tell it how the Tunnel should function.  This is done using a `.yaml` file.  Cloudflared will automatically look for the configuration file in the default `~/.cloudflared` directory.  Create the file using...
 
 ```lang-bash
-$ nano ~/test/config.yaml
+$ nano ~/.cloudflared/config.yaml
 ```
 The `config.yaml` file should contain...
 ```yaml
@@ -120,5 +117,34 @@ ingress:
   - service: http_status:404
 ```
 
-- `<TUNNEL-UUID>` is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid) you got from the step above.
-- `<DOMAIN>` is the domain name you have setup in your Cloudflare DNS service.
+- `<TUNNEL-UUID>` is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid) you got from the step above
+- `<DOMAIN>` is the domain name you have setup in your Cloudflare DNS service
+
+### 5. Route DNS
+For the Tunnel to work a CNAME recordin your Cloudflares DNS service needs to be created.  Run the command...
+
+```lang-bash
+$ cloudflared tunnel route dns <TUNNEL-UUID> <DOMAIN>
+```
+- `<TUNNEL-UUID>` is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid)
+- `<DOMAIN>` is the domain name you have setup in your Cloudflare DNS service
+
+### 6. Start the Tunnel
+Almost there, fire up the Tunnel with the command...
+
+```lang-bash
+$ cloudflared tunnel run <TUNNEL-UUID>
+```
+- `<TUNNEL-UUID>` is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid)
+
+This command launches the Tunnel based on the configuration you specified in the `~/.cloudflared/config.yaml` file and produces and output similar to...
+
+```lang-bash
+INFO[2022-05-03T04:20:00] INF connection a513d3a2a-1b41-1dada-8a4a-1435a87b1800 registered connIndex=0 location=ATL
+INFO[2022-05-03T04:20:01] INF connection b424c1c1a-2b33-2cbdf-7a3d-5435a87b1774 registered connIndex=0 location=IAD
+INFO[2022-05-03T04:20:02] INF connection c335a2c1e-3a45-3bbde-6a1e-3453a87b1666 registered connIndex=0 location=ATL
+INFO[2022-05-03T04:20:03] INF connection d246b7a4a-4a12-1afdf-5a2e-1635a87b1123 registered connIndex=0 location=IAD
+```
+You should be able to open a browser at the `<DOMAIN>` and see the service you are hosting.
+
+![Success!](/success.png)
