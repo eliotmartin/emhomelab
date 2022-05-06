@@ -28,12 +28,7 @@ cover:
     relative: false # when using page bundles set this to true
     hidden: false # only hide on current single page
 ---
-## The Problem
-Exposing some of my services to the internet involves forwarding ports on my router (specifically 80 and 443) to the machines hosting them.  This is bad and makes me paranoid.  I wanted to be able to reach these services from outside without compromising my networks security.
-
----
-## The Solution
-Set up a **Cloudflare Tunnel** and **NGINX Proxy Manager**
+Exposing some of my services to the internet involves forwarding ports on my router (specifically 80 and 443) to the machines hosting them.  This is bad and makes me paranoid.  I wanted to be able to reach these services from outside without compromising my networks security by setting up a **Cloudflare Tunnel** and **NGINX Proxy Manager**
 
 ---
 ### Cloudflare's Tunnel
