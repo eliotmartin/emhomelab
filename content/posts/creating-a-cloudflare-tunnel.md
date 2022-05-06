@@ -3,12 +3,12 @@ title: "Creating a Cloudflare Tunnel"
 date: 2022-05-05T21:08:09+01:00
 # weight: 1
 # aliases: ["/first"]
-tags: ["first"]
-categories: ["non-tech"]
+tags: ["cloudflare","security"]
+categories: ["tech"]
 author: "Eliot"
 showToc: true
 TocOpen: false
-draft: true
+draft: false
 hidemeta: false
 comments: false
 description: "Avoiding port forwards and securing my shit"
@@ -99,7 +99,7 @@ You can obtain more detailed information for each tunnel with `cloudflared tunne
 ID                                      NAME            CREATED                 CONNECTIONS
 c522d8e5f-3b55-4abcd-8416-0335c87a1457  <TUNNEL-NAME>   2022-05-03T20:31:57Z    2xAMS, 2xLHR
 ```
-Note the `ID` in the reponse.  This the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid).  You will need this in the next step.
+***Note** `ID` in the reponse is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid).  You will need this later on.
 
 ### 4. Create a config.yaml File
 Cloudflared is going to need some configuration to tell it how the Tunnel should function.  This is done using a `.yaml` file.  Cloudflared will automatically look for the configuration file in the default `~/.cloudflared` directory.  Create the file using...
@@ -121,7 +121,7 @@ ingress:
   - service: http_status:404
 ```
 
-- `<TUNNEL-UUID>` is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid) you got from the step above
+- `<TUNNEL-UUID>` is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid) you got earlier
 - `<DOMAIN>` is the domain name you have setup in your Cloudflare DNS service
 
 Adding additional subdomains to the `config.yaml` file is done by adding the following block...
@@ -164,7 +164,8 @@ INFO[2022-05-03T04:20:01] INF connection b424c1c1a-2b33-2cbdf-7a3d-5435a87b1774 
 INFO[2022-05-03T04:20:02] INF connection c335a2c1e-3a45-3bbde-6a1e-3453a87b1666 registered connIndex=0 location=ATL
 INFO[2022-05-03T04:20:03] INF connection d246b7a4a-4a12-1afdf-5a2e-1635a87b1123 registered connIndex=0 location=IAD
 ```
-Press CTRL+C to stop the Tunnel.
+
+All being well, you should be able to see the service at the end of the `<DOMAIN>`.  Press CTRL+C to stop the Tunnel.
 
 ### 8. Make Cloudflared a Service 
 Now it's time to turn Cloudflared into a service so it starts up and runs in background whenever the host machine boots.  Run the command...
@@ -184,5 +185,3 @@ $ sudo systemctl enable cloudflared
 $ sudo systemctl start cloudflared
 $ sudo systemctl status cloudflared
 ```
-
-That's the Cloudflare Tunnel created, configured and running!
