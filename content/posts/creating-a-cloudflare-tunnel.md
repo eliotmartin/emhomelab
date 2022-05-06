@@ -1,5 +1,5 @@
 ---
-title: "Cloudflare Tunnel and NGINX Proxy Manager Setup"
+title: "Creating a Cloudflare Tunnel"
 date: 2022-05-05T21:08:09+01:00
 # weight: 1
 # aliases: ["/first"]
@@ -48,7 +48,7 @@ The other component of this solution is a reverse proxy server, specifically in 
 
 > *...typically sits behind the firewall in a private network and directs client requests to the appropriate backend server. A reverse proxy provides an additional level of abstraction and control to ensure the smooth flow of network traffic between clients and servers.*
 
-You can find more about *NGIX Proxy Manger* on [their website](https://nginxproxymanager.com/).  It is a free. open source solution. I setup NGIX in a docker container using Docker Compose, but that is probably worthy of a post of it own.
+You can find more about *NGIX Proxy Manger* on [their website](https://nginxproxymanager.com/).  It is a free. open source solution. I setup NGIX in a docker container using Docker Compose, but that is probably worthy of a post of it own so I won't cover in this post.
 
 ## Setting Up the cloudflare Tunnel
 Cloudflare Tunnel requires the installation and configuration of a lightweight, open-source server-side daemon, *cloudflared*, to connect your infrastructure to Cloudflare.  Releases can be found on [GitHub](https://github.com/cloudflare/cloudflared/releases) and downloads are available as standalone binaries or packages like Debian and RPM.
@@ -145,6 +145,25 @@ INFO[2022-05-03T04:20:01] INF connection b424c1c1a-2b33-2cbdf-7a3d-5435a87b1774 
 INFO[2022-05-03T04:20:02] INF connection c335a2c1e-3a45-3bbde-6a1e-3453a87b1666 registered connIndex=0 location=ATL
 INFO[2022-05-03T04:20:03] INF connection d246b7a4a-4a12-1afdf-5a2e-1635a87b1123 registered connIndex=0 location=IAD
 ```
-You should be able to open a browser at the `<DOMAIN>` and see the service you are hosting.
+Press CTRL+C to stop the Tunnel.
 
-![Success!](/success.png)
+### 8. Make Cloudflared a Service 
+Now it's time to turn Cloudflared into a service so it starts up and runs in background whenever the host machine boots.  Run the command...
+
+```lang-bash
+$ sudo cloudflared service install
+```
+This *should* move all the contents of the `~/.cloudflared` directory into `/etc/cloudflared`.  Go to that directory, edit the `config.yaml` file tand point the `credentials-file` entry at the `/etc/cloudflared` directory...
+
+```yaml
+credentials-file: /etc/cloudflared/<TUNNEL-UUID>.json
+```
+Finally, enable, start, and check the service...
+
+```lang-bash
+$ sudo systemctl enable cloudflared
+$ sudo systemctl start cloudflared
+$ sudo systemctl status cloudflared
+```
+
+That's the Cloudflare Tunnel created, configured and running!
