@@ -29,11 +29,13 @@ cover:
     hidden: false # only hide on current single page
 ---
 ## The Problem
-Exposing some of my homelab services to the internet involves forwarding ports on my router (specifically 80 and 443) to the machines hosting them.  This is bad and makes me paranoid.  I wanted to be able to reach these services from outside without compromising my networks security.
+Exposing some of my services to the internet involves forwarding ports on my router (specifically 80 and 443) to the machines hosting them.  This is bad and makes me paranoid.  I wanted to be able to reach these services from outside without compromising my networks security.
 
+---
 ## The Solution
 Set up a **Cloudflare Tunnel** and **NGINX Proxy Manager**
 
+---
 ### Cloudflare's Tunnel
 According to Cloudflare themselves, a **Cloudflare Tunnel**...
 
@@ -43,13 +45,15 @@ You can read more about *Cloudflare's Tunnels* on [their website](https://www.cl
 
 You will need to setup a domain on cloudflares DNS service for the Tunnel to work, but the domain itself doesn't need to be registered with Cloudflare.  I used one I bought from [Ionas for £1.00](https://www.ionos.co.uk/domains/domain-names), but it works just as well with free domains.  You just need to delgate Cloudflare as the authoritative DNS nameserver by replacing your domains original nameservers with ones provided by Cloudflare.
 
+---
 ### NGINX Proxy Manager
 The other component of this solution is a reverse proxy server, specifically in this case NGINX Proxy Manager.  **A reverse proxy server**...
 
 > *...typically sits behind the firewall in a private network and directs client requests to the appropriate backend server. A reverse proxy provides an additional level of abstraction and control to ensure the smooth flow of network traffic between clients and servers.*
 
-You can find more about *NGIX Proxy Manger* on [their website](https://nginxproxymanager.com/).  It is a free. open source solution. I setup NGIX in a docker container using Docker Compose, but that is probably worthy of a post of it own so I won't cover in this post.
+You can find more about *NGIX Proxy Manger* on [their website](https://nginxproxymanager.com/).  It is a free. open source solution. I setup NGIX in a docker container using Docker Compose, but that is probably worthy of a post of it own so I won't cover it here.
 
+---
 ## Setting Up the cloudflare Tunnel
 Cloudflare Tunnel requires the installation and configuration of a lightweight, open-source server-side daemon, *cloudflared*, to connect your infrastructure to Cloudflare.  Releases can be found on [GitHub](https://github.com/cloudflare/cloudflared/releases) and downloads are available as standalone binaries or packages like Debian and RPM.
 
@@ -120,6 +124,21 @@ ingress:
 - `<TUNNEL-UUID>` is the [Tunnel UUID](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-useful-terms#tunnel-uuid) you got from the step above
 - `<DOMAIN>` is the domain name you have setup in your Cloudflare DNS service
 
+Adding additional subdomains to the `config.yaml` file is done by adding the following block...
+
+```yaml
+  - hostname: <SUBDOMAIN.DOMAIN>
+  service: https://localhost:443
+  originRequest:
+    noTLSVerify: true
+```
+- `<SUBDOMAIN.DOMAIN>` is the subdomain name you have setup in your Cloudflare DNS service
+
+Make sure the last `ingress:` entry in the `config.yaml` file is...
+
+```yaml
+  - service: http_status:404
+```
 ### 5. Route DNS
 For the Tunnel to work a CNAME recordin your Cloudflares DNS service needs to be created.  Run the command...
 
