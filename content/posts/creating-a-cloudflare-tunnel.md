@@ -180,3 +180,6 @@ $ sudo systemctl enable cloudflared
 $ sudo systemctl start cloudflared
 $ sudo systemctl status cloudflared
 ```
+
+    
+Thats that then!
